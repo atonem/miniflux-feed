@@ -38,7 +38,13 @@ func main() {
 // TODO: Params
 func getEntries(limit int, offset int) (miniflux.Entries, error) {
 	// Fetch all feeds.
-	filter := miniflux.Filter{Limit: limit, Offset: offset}
+	filter := miniflux.Filter{
+		Limit:     limit,
+		Offset:    offset,
+		Status:    "unread",
+		Order:     "published_at",
+		Direction: "desc",
+	}
 	result, err := client.Entries(&filter)
 
 	if err != nil {
